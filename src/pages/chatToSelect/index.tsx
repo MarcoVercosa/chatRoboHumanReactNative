@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { useDispatch, useSelector } from "react-redux"
 import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
 import { selectorSocket } from '../../store/reducers/socket.reducer';
-import RenderFlatChatToSelectRobo from './RenderFlatChatToSelectRobo/RenderFlatChatToSelectRobo';
+import RenderFlatChatToSelect from './RenderFlatChatToSelect/RenderFlatChatToSelect';
 
 import {
     receiveMessageRoboReducer, addNewChatPrivateReducer, receiveMessagePrivateReducer,
@@ -13,6 +13,7 @@ import {
 
 
 export default function ChatToSelect({ navigation }: any): JSX.Element {
+    console.log("Renderizou ChatToSelect")
 
     const dispatch = useDispatch()
     let telaInicialData = useSelector(selectorTelaInicial)
@@ -84,7 +85,7 @@ export default function ChatToSelect({ navigation }: any): JSX.Element {
                 <FlatList
                     data={chatContent}
                     keyExtractor={item => String(item.chatID)}
-                    renderItem={item => <RenderFlatChatToSelectRobo item={item} navigation={navigation} />}
+                    renderItem={item => <RenderFlatChatToSelect item={item} navigation={navigation} />}
                 />
             </View>
         </View>

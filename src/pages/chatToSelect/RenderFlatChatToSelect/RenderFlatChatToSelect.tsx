@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux"
 
 
 
-export default function RenderFlatChatToSelectRobo({ item, navigation }: any): JSX.Element {
+export default function RenderFlatChatToSelect({ item, navigation }: any): JSX.Element {
+    console.log("Renderizou RenderFlatChatToSelectRobo")
     const dispatch = useDispatch()
 
     function OpenChatWindow(chatSelect: string) {

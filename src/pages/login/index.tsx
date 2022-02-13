@@ -8,13 +8,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function Login({ navigation }: any): JSX.Element {
+    console.log("Renderizou Login")
     let { socket }: any = useSelector(selectorSocket)
     const [email, setEmail] = useState<string>("")
     const [name, setName] = useState<string>("")
     const dispatch = useDispatch()
 
     function Entrar(): void {
-        console.log(email + name)
         // dispatch(changeDadosTelaInicialReducer({ email: email, name: name }))
         if (name.length > 3 && email.length > 5) {
             //o server irá atrelar o id socket com o username
@@ -26,7 +26,6 @@ export default function Login({ navigation }: any): JSX.Element {
     }
 
     useEffect(() => {
-        console.log(email + name)
         //aqui é o retorno do servidor quando clicar no botao entrar. Será verificado
         //se ja possui algun user com o nome solicitado.
         socket.on("receive_uservalidation_from_server", ({ sucess, message }: { sucess: Boolean, message: string }) => {

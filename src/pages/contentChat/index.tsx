@@ -1,13 +1,14 @@
-import React, { useState, useEffect, memo } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert, FlatList, TouchableWithoutFeedbackComponent } from 'react-native';
+import React, { useState, memo } from 'react';
+import { StyleSheet, View, TextInput, TouchableOpacity, Image, Alert, FlatList, TouchableWithoutFeedbackComponent } from 'react-native';
 import { useDispatch, useSelector } from "react-redux"
 import { sendMessageRoboReducer, sendMessagePrivateReducer, sendMessageRoomReducer, selectorChatContent, IChatContent } from '../../store/reducers/contentChat.reducer'
 import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
 import { selectorSocket } from '../../store/reducers/socket.reducer';
 import { RenderFlatContentChatHeader } from "./RenderFlatContentChatHeader/index"
-import { RenderFlatContentChat } from './RenderFlatContentChat';
+import RenderFlatContentChat from './RenderFlatContentChat';
 
 export default function ContentChat(): JSX.Element {
+    console.log("Renderizou ContentChat")
     const [typeMessage, setTypeMessage] = useState<string>("")
 
     const { socket }: any = useSelector(selectorSocket)
@@ -51,6 +52,7 @@ export default function ContentChat(): JSX.Element {
             socket.emit(socketDestinatioString, { message, author, time, chatID, destination })
             setTypeMessage("")
         }
+        setTypeMessage("")
     }
 
     return (
@@ -123,3 +125,4 @@ const styles = StyleSheet.create({
     }
 
 })
+
