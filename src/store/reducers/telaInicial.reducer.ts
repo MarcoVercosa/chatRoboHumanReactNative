@@ -25,8 +25,6 @@ const dadosTelaInicial = createSlice({
         logoffChatReducer: (state: ITelaInicial, { payload }): void => {
             state.email = ""
             state.name = ""
-            // state.activeComponentChat = false
-            // state.componentTelaInicial = true
         },
 
     }

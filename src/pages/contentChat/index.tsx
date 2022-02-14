@@ -109,7 +109,8 @@ const styles = StyleSheet.create({
         width: 325,
         height: 90,
         marginRight: 5,
-        borderRadius: 25
+        borderRadius: 25,
+        fontSize: 25
 
     },
     viewContainerChatMessageButton: {

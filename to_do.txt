@@ -1,0 +1,7 @@
+criar método, ao segurar um chat dará a opção de ser excluído
+Arrumar barra de navegação
+estilizar mais os componentes.
+Colocar alguma animação
+não deixar voltar para a tela de login pelas setas de navegação ou mandar uma mensagem pelo o menos que será deslogado
+melhorar tipagem
+arrumar bug do teclado que desconfigura o layout

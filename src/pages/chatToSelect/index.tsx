@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from "react-redux"
 import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
 import { selectorSocket } from '../../store/reducers/socket.reducer';
 import RenderFlatChatToSelect from './RenderFlatChatToSelect/RenderFlatChatToSelect';
-
+import ModalLogoff from "./modal/logoff/index"
+import ModalCreate from "./modal/create/index"
 import {
     receiveMessageRoboReducer, addNewChatPrivateReducer, receiveMessagePrivateReducer,
     addNewChatRoomReducer, receiveMessageRoomReducer, IChatContent, selectorChatContent
@@ -14,6 +15,16 @@ import {
 
 export default function ChatToSelect({ navigation }: any): JSX.Element {
     console.log("Renderizou ChatToSelect")
+
+    const [modalLogoff, setModalLogoff] = useState<boolean>(false)
+    const [modalCreate, setModalCreate] = useState<boolean>(false)
+
+    function OpenCloseModalLogoff() {
+        setModalLogoff(false)
+    }
+    function OpenCloseModaCreate() {
+        setModalCreate(false)
+    }
 
     const dispatch = useDispatch()
     let telaInicialData = useSelector(selectorTelaInicial)
@@ -34,6 +45,7 @@ export default function ChatToSelect({ navigation }: any): JSX.Element {
 
         //recebe mensagem robo 
         socket.on("received_message_from_robo", ({ content, author, time, image, isCharts }: any) => {
+            console.log("Mensagem recebida do ROBO")
             dispatch(receiveMessageRoboReducer({ content, author, time, image, isCharts }))
         })
         //recebe mensagem privada
@@ -63,6 +75,7 @@ export default function ChatToSelect({ navigation }: any): JSX.Element {
         })
 
         socket.on("received_message_room", ({ destination, message, author, chatID }: any) => {
+            console.log("recebeu mensagem de SALA")
             dispatch(receiveMessageRoomReducer({ destination, message, author, chatID }))
         })
 
@@ -71,14 +84,30 @@ export default function ChatToSelect({ navigation }: any): JSX.Element {
 
     return (
         <View style={styles.container}>
+
+
             <View style={styles.viewInfoUserContainer}>
-                <View style={styles.viewInfoUser} >
-                    <Text style={styles.textInfo}> User: </Text>
-                    <Text style={{ fontSize: 15 }}>{telaInicialData.name}</Text>
+                <View style={styles.opçoes}>
+                    <TouchableOpacity onPressOut={() => setModalLogoff(true)}>
+                        <Image style={styles.opçoesLogoffImage} source={require("../../assets/icons/logoff.png")} />
+                        {modalLogoff && <ModalLogoff modalLogoff={modalLogoff} OpenCloseModal={OpenCloseModalLogoff} navigation={navigation} />}
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.viewInfoUser}>
-                    <Text style={styles.textInfo}>ID: </Text>
-                    <Text style={{ fontSize: 15 }}>{socket.id}</Text>
+                <View>
+                    <View style={styles.viewInfoUser} >
+                        <Text style={styles.textInfo}> User: </Text>
+                        <Text style={{ fontSize: 15 }}>{telaInicialData.name}</Text>
+                    </View>
+                    <View style={styles.viewInfoUser}>
+                        <Text style={styles.textInfo}>ID: </Text>
+                        <Text style={{ fontSize: 15 }}>{socket.id}</Text>
+                    </View>
+                </View>
+                <View style={styles.logoff}>
+                    <TouchableOpacity onPressOut={() => setModalCreate(true)}>
+                        <Image style={styles.opçoesCreateImage} source={require("../../assets/icons/create.png")} />
+                        {modalCreate && <ModalCreate modalLogoff={modalCreate} OpenCloseModaCreate={OpenCloseModaCreate} navigation={navigation} />}
+                    </TouchableOpacity>
                 </View>
             </View>
             <View>
@@ -88,6 +117,7 @@ export default function ChatToSelect({ navigation }: any): JSX.Element {
                     renderItem={item => <RenderFlatChatToSelect item={item} navigation={navigation} />}
                 />
             </View>
+
         </View>
     )
 }
@@ -101,7 +131,8 @@ const styles = StyleSheet.create({
     viewInfoUserContainer: {
         backgroundColor: "white",
         flex: 0.15,
-        justifyContent: 'center',
+        flexDirection: "row",
+        justifyContent: "space-around",
         alignContent: 'center',
         textAlign: "center",
         alignItems: "center",
@@ -121,5 +152,20 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
     },
+    opçoes: {
+
+    },
+    logoff: {
+
+    },
+    opçoesLogoffImage: {
+        width: 40,
+        height: 40,
+    },
+    opçoesCreateImage: {
+        width: 60,
+        height: 50,
+        tintColor: "#767872",
+    }
 
 })

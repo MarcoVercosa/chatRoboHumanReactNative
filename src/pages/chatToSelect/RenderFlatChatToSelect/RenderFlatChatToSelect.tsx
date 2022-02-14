@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { activeWindowChat } from "../../../store/reducers/contentChat.reducer"
 import { useDispatch } from "react-redux"
 
 
 
-export default function RenderFlatChatToSelect({ item, navigation }: any): JSX.Element {
-    console.log("Renderizou RenderFlatChatToSelectRobo")
+function RenderFlatChatToSelect({ item, navigation }: any): JSX.Element {
+    console.log("Renderizou RenderFlatChatToSelect")
     const dispatch = useDispatch()
 
     function OpenChatWindow(chatSelect: string) {
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
     }
 })
 
-// export { RenderFlatChatToSelectRobo }
+export default memo(RenderFlatChatToSelect)
