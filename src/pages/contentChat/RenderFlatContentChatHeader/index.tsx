@@ -6,8 +6,8 @@ function RenderFlatContentChatHeader({ item }: any): any {
         <>
             {item.openChat &&
                 <View style={styles.viewContainerChatHeader}>
-                    <Text style={{ fontSize: 30 }}>{item.chatNameDestination}</Text>
-                    <Text style={{ fontSize: 18 }}>ID: {item.chatID}</Text>
+                    <Text selectable={true} style={styles.viewContainerChatHeaderTextName}>{item.chatNameDestination}</Text>
+                    <Text selectable={true} style={styles.viewContainerChatHeaderTextId}>ID: {item.chatID}</Text>
                 </View>
             }
         </>
@@ -17,10 +17,21 @@ function RenderFlatContentChatHeader({ item }: any): any {
 const styles = StyleSheet.create({
     viewContainerChatHeader: {
         backgroundColor: "white",
-        height: 70,
-        justifyContent: "center",
+        height: 95,
+
         alignItems: "center",
     },
+    viewContainerChatHeaderTextName: {
+        fontSize: 30,
+        textAlign: "center",
+        alignContent: "center",
+
+    },
+    viewContainerChatHeaderTextId: {
+        fontSize: 18,
+        textAlign: "center",
+        alignContent: "center",
+    }
 })
 
 export { RenderFlatContentChatHeader }

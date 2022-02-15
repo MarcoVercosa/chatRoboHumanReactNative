@@ -6,7 +6,7 @@ import { selectorSocket } from '../../../../store/reducers/socket.reducer';
 import { selectorChatContent } from '../../../../store/reducers/contentChat.reducer';
 import { selectorTelaInicial } from '../../../../store/reducers/telaInicial.reducer';
 
-export default function ModaCreate({ modalcreate, OpenCloseModaCreate, navigation }: any) {
+export default function ModaCreate({ modalcreate, OpenCloseModaCreate }: any) {
     const [isEnabledRoom, setIsEnabledRoom] = useState(true);
     const [isEnabledPrivate, setIsEnabledPrivate] = useState(false);
     const [isEnabledJoinRoom, setIsEnabledJoinRoome] = useState(false);

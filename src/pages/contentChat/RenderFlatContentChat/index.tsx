@@ -44,8 +44,6 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         padding: 12,
         width: 320,
-
-
         justifyContent: "flex-end",
     },
     flatContentChatMySelf: {

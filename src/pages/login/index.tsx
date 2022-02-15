@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { useDispatch, useSelector } from "react-redux"
 import { selectorSocket } from '../../store/reducers/socket.reducer';
 import { changeDadosTelaInicialReducer } from '../../store/reducers/telaInicial.reducer';

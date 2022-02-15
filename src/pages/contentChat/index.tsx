@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Image, Alert, FlatList, TouchableWithoutFeedbackComponent } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Image, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { useDispatch, useSelector } from "react-redux"
 import { sendMessageRoboReducer, sendMessagePrivateReducer, sendMessageRoomReducer, selectorChatContent, IChatContent } from '../../store/reducers/contentChat.reducer'
 import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
@@ -7,7 +7,7 @@ import { selectorSocket } from '../../store/reducers/socket.reducer';
 import { RenderFlatContentChatHeader } from "./RenderFlatContentChatHeader/index"
 import RenderFlatContentChat from './RenderFlatContentChat';
 
-export default function ContentChat(): JSX.Element {
+function ContentChat(): JSX.Element {
     console.log("Renderizou ContentChat")
     const [typeMessage, setTypeMessage] = useState<string>("")
 
@@ -70,19 +70,23 @@ export default function ContentChat(): JSX.Element {
                     renderItem={({ item }) => <RenderFlatContentChat item={item} />}
                 />
 
-            </View>
-
-            <View style={styles.viewContainerChatMessageType}>
-                <TextInput
-                    placeholder='Mensagem'
-                    style={styles.viewContainerChatInputMessageType}
-                    multiline={true}
-                    value={typeMessage}
-                    onChangeText={(text: string) => { setTypeMessage(text) }}
-                />
-                <TouchableOpacity style={styles.viewContainerChatMessageButton} onPressOut={SendMessage}>
-                    <Image style={styles.viewContainerChatMessageImage} source={require("../../assets/icons/send.png")} />
-                </TouchableOpacity>
+                {/*  evita que  o teclado desconfigure o layout */}
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                >
+                    <View style={styles.viewContainerChatMessageType}>
+                        <TextInput
+                            placeholder='Mensagem'
+                            style={styles.viewContainerChatInputMessageType}
+                            multiline={true}
+                            value={typeMessage}
+                            onChangeText={(text: string) => { setTypeMessage(text) }}
+                        />
+                        <TouchableOpacity style={styles.viewContainerChatMessageButton} onPressOut={SendMessage}>
+                            <Image style={styles.viewContainerChatMessageImage} source={require("../../assets/icons/send.png")} />
+                        </TouchableOpacity>
+                    </View>
+                </KeyboardAvoidingView>
             </View>
         </>
 
@@ -92,29 +96,32 @@ export default function ContentChat(): JSX.Element {
 const styles = StyleSheet.create({
     viewContainerChat: {
         backgroundColor: "#a8d7ff",
-        flex: 0.92
+        flex: 1
     },
 
     viewContainerChatMessageType: {
-        flex: 0.13,
         flexDirection: "row",
-        // backgroundColor: "red",
         borderRadius: 25,
         width: 400,
         justifyContent: "center",
         alignItems: "center",
+        margin: 0,
+
     },
     viewContainerChatInputMessageType: {
-        backgroundColor: "#c9c3cb",
+        backgroundColor: "white",
         width: 325,
         height: 90,
         marginRight: 5,
         borderRadius: 25,
-        fontSize: 25
+        fontSize: 25,
+        borderWidth: 1,
+        borderColor: "grey",
+
 
     },
     viewContainerChatMessageButton: {
-        backgroundColor: "#a8d7ff",
+        backgroundColor: "#00ffe0",
         padding: 3,
         borderRadius: 25,
         width: 55
@@ -126,4 +133,5 @@ const styles = StyleSheet.create({
     }
 
 })
+export default memo(ContentChat)
 

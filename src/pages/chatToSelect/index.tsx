@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity, Image } from 'react-native';
-import { useDispatch, useSelector } from "react-redux"
-import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
-import { selectorSocket } from '../../store/reducers/socket.reducer';
+import React, { useEffect, useState, memo } from 'react';
+import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity, Image, BackHandler, } from 'react-native';
+
 import RenderFlatChatToSelect from './RenderFlatChatToSelect/RenderFlatChatToSelect';
 import ModalLogoff from "./modal/logoff/index"
 import ModalCreate from "./modal/create/index"
+import { useDispatch, useSelector } from "react-redux"
+import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
+import { selectorSocket } from '../../store/reducers/socket.reducer';
 import {
     receiveMessageRoboReducer, addNewChatPrivateReducer, receiveMessagePrivateReducer,
     addNewChatRoomReducer, receiveMessageRoomReducer, IChatContent, selectorChatContent
@@ -13,17 +14,18 @@ import {
     from '../../store/reducers/contentChat.reducer'
 
 
-export default function ChatToSelect({ navigation }: any): JSX.Element {
+function ChatToSelect({ navigation }: any): JSX.Element {
     console.log("Renderizou ChatToSelect")
 
     const [modalLogoff, setModalLogoff] = useState<boolean>(false)
     const [modalCreate, setModalCreate] = useState<boolean>(false)
 
+
     function OpenCloseModalLogoff() {
-        setModalLogoff(false)
+        setModalLogoff(!modalLogoff)
     }
     function OpenCloseModaCreate() {
-        setModalCreate(false)
+        setModalCreate(!modalCreate)
     }
 
     const dispatch = useDispatch()
@@ -32,6 +34,10 @@ export default function ChatToSelect({ navigation }: any): JSX.Element {
     let chatContent: IChatContent[] = useSelector(selectorChatContent)
 
     useEffect(() => {
+        //não permite voltar com a seta fisica do celular
+        BackHandler.addEventListener('hardwareBackPress', function () { return true })
+
+
         //recebe do servidor dados (se sucesso) para criar conversa privada. O client inicia o ciclo
         //poder ser por solicicitação da outra ponta, pois o amigo ao add, a outra ponta recebe a solicitação para criar o chat
         socket.on("create_chat_private_client", ({ sucess, message, userName, id, time }: any) => {
@@ -84,11 +90,11 @@ export default function ChatToSelect({ navigation }: any): JSX.Element {
 
     return (
         <View style={styles.container}>
-
-
             <View style={styles.viewInfoUserContainer}>
+
                 <View style={styles.opçoes}>
-                    <TouchableOpacity onPressOut={() => setModalLogoff(true)}>
+                    {/* renderiza o heaer, onde ficam nome user, o ID e os dois modals */}
+                    <TouchableOpacity onPressOut={OpenCloseModalLogoff}>
                         <Image style={styles.opçoesLogoffImage} source={require("../../assets/icons/logoff.png")} />
                         {modalLogoff && <ModalLogoff modalLogoff={modalLogoff} OpenCloseModal={OpenCloseModalLogoff} navigation={navigation} />}
                     </TouchableOpacity>
@@ -96,27 +102,28 @@ export default function ChatToSelect({ navigation }: any): JSX.Element {
                 <View>
                     <View style={styles.viewInfoUser} >
                         <Text style={styles.textInfo}> User: </Text>
-                        <Text style={{ fontSize: 15 }}>{telaInicialData.name}</Text>
+                        <Text selectable={true} style={{ fontSize: 15 }}>{telaInicialData.name}</Text>
                     </View>
                     <View style={styles.viewInfoUser}>
                         <Text style={styles.textInfo}>ID: </Text>
-                        <Text style={{ fontSize: 15 }}>{socket.id}</Text>
+                        <Text selectable={true} style={{ fontSize: 15 }}>{socket.id}</Text>
                     </View>
                 </View>
                 <View style={styles.logoff}>
-                    <TouchableOpacity onPressOut={() => setModalCreate(true)}>
+                    <TouchableOpacity onPressOut={OpenCloseModaCreate}>
                         <Image style={styles.opçoesCreateImage} source={require("../../assets/icons/create.png")} />
                         {modalCreate && <ModalCreate modalLogoff={modalCreate} OpenCloseModaCreate={OpenCloseModaCreate} navigation={navigation} />}
                     </TouchableOpacity>
                 </View>
             </View>
-            <View>
-                <FlatList
-                    data={chatContent}
-                    keyExtractor={item => String(item.chatID)}
-                    renderItem={item => <RenderFlatChatToSelect item={item} navigation={navigation} />}
-                />
-            </View>
+
+            {/* renderiza os chats para serem selecionados */}
+            <FlatList
+                data={chatContent}
+                keyExtractor={item => String(item.chatID)}
+                renderItem={item => <RenderFlatChatToSelect item={item} navigation={navigation} />}
+                scrollEnabled={true}
+            />
 
         </View>
     )
@@ -130,7 +137,7 @@ const styles = StyleSheet.create({
     },
     viewInfoUserContainer: {
         backgroundColor: "white",
-        flex: 0.15,
+        //flex: 0.15,
         flexDirection: "row",
         justifyContent: "space-around",
         alignContent: 'center',
@@ -169,3 +176,5 @@ const styles = StyleSheet.create({
     }
 
 })
+
+export default memo(ChatToSelect)

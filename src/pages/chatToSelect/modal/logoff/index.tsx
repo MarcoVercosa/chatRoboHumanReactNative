@@ -20,7 +20,7 @@ export default function ModalLogoff({ modalLogoff, OpenCloseModal, navigation }:
         //reconecta novamente
         dispatch(socketReconnectReducer(true))
 
-        navigation.navigate("Login")
+        navigation.navigate("LOGIN")
         OpenCloseModal()
 
     }
