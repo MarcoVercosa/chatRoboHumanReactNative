@@ -2,7 +2,6 @@ criar método, ao segurar um chat dará a opção de ser excluído - DONE
 Arrumar barra de navegação - DONE
 arrumar bug do teclado que desconfigura o layout - DONE
 não deixar voltar para a tela de login pelas setas de navegação ou mandar uma mensagem pelo o menos que será deslogado - DONE
-estilizar mais os componentes.
-Colocar alguma animação
 melhorar tipagem
-Não está deletando o chatRoom no server
+estilizar mais os componentes.
+

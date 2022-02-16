@@ -4,18 +4,21 @@ import { useSelector } from "react-redux"
 import { selectorTelaInicial } from "../../../store/reducers/telaInicial.reducer"
 import Charts from '../charts';
 
+interface IChatContentMap {
+    content: string;
+    author: string;
+    time: any;
+    image: string;
+    isCharts: []
+}
 
-
-
-function RenderFlatContentChat({ item }: any): any {
-    console.log("Renderizou RenderFlatContentChat")
-    console.log
+function RenderFlatContentChat({ item }: any): JSX.Element {
     let nameTelaInicial: { name: string } = useSelector(selectorTelaInicial)
     let array: any = []
     //se o chat estiver aberto
     if (item.openChat) {
         //faz um map no conteudo das conversar e add na variável
-        item.contentChat.map((data: any) => {
+        item.contentChat.map((data: IChatContentMap) => {
             array.push(
                 <View style={[styles.flatContentChatContainer,
                 data.author === nameTelaInicial.name ? styles.flatContentChatMySelf : styles.flatContentChatOthers
@@ -34,7 +37,9 @@ function RenderFlatContentChat({ item }: any): any {
         })
     }
     return (
-        array
+        <>
+            {array}
+        </>
     )
 }
 

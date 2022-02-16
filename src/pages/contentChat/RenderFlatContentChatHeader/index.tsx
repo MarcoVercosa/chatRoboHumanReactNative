@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { IChatContent } from "../../../store/reducers/contentChat.reducer"
 
-function RenderFlatContentChatHeader({ item }: any): any {
+function RenderFlatContentChatHeader({ item }: { item: IChatContent }): JSX.Element {
     return (
         <>
             {item.openChat &&

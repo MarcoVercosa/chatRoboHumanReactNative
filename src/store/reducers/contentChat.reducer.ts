@@ -14,7 +14,7 @@ export interface IChatContent {
     socketDestination: string;
     isRobo: boolean
     isPrivate: boolean
-    chatID: number | undefined;
+    chatID: string | undefined;
     contentChat: Array<{
         content: string,
         author: string,
@@ -32,7 +32,7 @@ const initialState: IChatContent[] =
             socketDestination: "send_message_to_robo_imc",
             isRobo: true,
             isPrivate: false,
-            chatID: 1,
+            chatID: "1",
             contentChat: [{
                 content: "Olá, tudo bem ? Sou o Robô- IMC. Posso lhe ajudar com seu IMC (Índice de Massa Corporal) ?",
                 author: "ROBÔ - IMC",
@@ -48,7 +48,7 @@ const initialState: IChatContent[] =
             chatNameDestination: "ROBÔ - Reservatórios SP",
             // avatar: "fas fa-3x fa-hand-holding-water",
             // color: "rgb(79, 135, 255)",
-            chatID: 2,
+            chatID: "2",
             isRoom: false,
             isPrivate: false,
             socketDestination: "send_message_to_robo_reservatorios_sp",
@@ -86,8 +86,8 @@ const contentChat = createSlice({
         //altera a array de conversa para true e assim renderizar a janela de conversa
         activeWindowChat(state: any, { payload }: IactiveWindowChat): any {
             //recebe o nome do chat selecionado e deixa o respectivo obj do chat como True
-            state.map((data: any, index: number) => {
-                if (data.chatID === payload) {
+            state.map((data: any) => {
+                if (data.chatID == payload.chatID) {
                     data.openChat = true
                 } else {
                     data.openChat = false
@@ -165,7 +165,7 @@ const contentChat = createSlice({
 
         },
         deleteChatReducer(state: any, { payload }: IdeleteChatReducer) {
-            let temp = state.filter((data: any) => data.chatID !== payload)
+            let temp = state.filter((data: any) => data.chatID !== payload.chatID)
             return state = temp
         },
         initialStateReconnect(state: any, { payload }: any) {

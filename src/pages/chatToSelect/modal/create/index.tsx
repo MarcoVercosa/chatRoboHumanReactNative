@@ -3,8 +3,8 @@ import { Switch, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput, Ale
 import { useSelector } from "react-redux"
 
 import { selectorSocket } from '../../../../store/reducers/socket.reducer';
-import { selectorChatContent } from '../../../../store/reducers/contentChat.reducer';
-import { selectorTelaInicial } from '../../../../store/reducers/telaInicial.reducer';
+import { selectorChatContent, IChatContent } from '../../../../store/reducers/contentChat.reducer';
+import { selectorTelaInicial, ITelaInicial } from '../../../../store/reducers/telaInicial.reducer';
 
 export default function ModaCreate({ modalcreate, OpenCloseModaCreate }: any) {
     const [isEnabledRoom, setIsEnabledRoom] = useState(true);
@@ -13,8 +13,8 @@ export default function ModaCreate({ modalcreate, OpenCloseModaCreate }: any) {
     const [typeMessage, setTypeMessage] = useState<string>("")
 
     const { socket }: any = useSelector(selectorSocket)
-    const contentAllChats: Array<{}> = useSelector(selectorChatContent)
-    const dadosTelaInicial: any = useSelector(selectorTelaInicial)
+    const contentAllChats: IChatContent[] = useSelector(selectorChatContent)
+    const dadosTelaInicial: ITelaInicial = useSelector(selectorTelaInicial)
 
 
     function ChatCreate() {

@@ -5,8 +5,13 @@ import { logoffChatReducer } from '../../../../store/reducers/telaInicial.reduce
 import { selectorSocket, socketReconnectReducer } from '../../../../store/reducers/socket.reducer';
 import { initialStateReconnect } from '../../../../store/reducers/contentChat.reducer';
 
+interface IModalLogoff {
+    modalLogoff: boolean;
+    OpenCloseModal: () => void;
+    navigation: any
+}
 
-export default function ModalLogoff({ modalLogoff, OpenCloseModal, navigation }: any) {
+export default function ModalLogoff({ modalLogoff, OpenCloseModal, navigation }: IModalLogoff) {
     const dispatch = useDispatch()
     const { socket }: any = useSelector(selectorSocket)
 
@@ -22,7 +27,6 @@ export default function ModalLogoff({ modalLogoff, OpenCloseModal, navigation }:
 
         navigation.navigate("LOGIN")
         OpenCloseModal()
-
     }
 
     return (
@@ -31,10 +35,6 @@ export default function ModalLogoff({ modalLogoff, OpenCloseModal, navigation }:
             animationType="slide"
             transparent={false}
             visible={modalLogoff}
-            // onRequestClose={() => {
-            //     Alert.alert("Modal has been closed.");
-            //     OpenCloseModal(!modalLogoff);
-            // }}
             style={styles.modalLogoffContainer}
         >
             <View style={styles.modalLogoffContainer}>

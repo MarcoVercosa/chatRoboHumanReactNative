@@ -22,7 +22,9 @@ export interface IreceiveMessageRoboReducer {
     }
 }
 export interface IactiveWindowChat {
-    payload: string
+    payload: {
+        chatID: string
+    }
 }
 
 export interface IreceiveMessagePrivateReducer {

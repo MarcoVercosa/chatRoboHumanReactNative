@@ -1,17 +1,11 @@
-import React, { memo, useState } from 'react'
-import { Switch, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput, Alert } from "react-native";
+import React, { memo, } from 'react'
+import { Text, View, } from "react-native";
 
 import {
-    LineChart,
     BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
 } from "react-native-chart-kit";
 
-
-interface ICharts {
+export interface ICharts {
     data: Array<{
         currentDate: string;
         reservatorios: Array<{
@@ -22,20 +16,10 @@ interface ICharts {
     }>
 }
 
-interface IChartData {
-    name: String;
-    volume: Number;
-    variacao: Number;
-}
-// window.dispatchEvent(new Event('resize'));
 
 function Charts({ data }: ICharts): JSX.Element {
-    console.log("Renderizou Charts")
 
     const chartConfig = {
-        // backgroundGradientFrom: "red",
-        // backgroundGradientFromOpacity: 1,
-        //backgroundGradientTo: "#00FFFF",
         backgroundGradientToOpacity: 0,
         color: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
         strokeWidth: 2, // optional, default 3
@@ -83,7 +67,6 @@ function Charts({ data }: ICharts): JSX.Element {
     };
 
     return (
-
         <>
             <View>
                 <Text

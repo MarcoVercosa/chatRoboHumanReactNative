@@ -5,7 +5,7 @@ import RenderFlatChatToSelect from './RenderFlatChatToSelect/RenderFlatChatToSel
 import ModalLogoff from "./modal/logoff/index"
 import ModalCreate from "./modal/create/index"
 import { useDispatch, useSelector } from "react-redux"
-import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
+import { selectorTelaInicial, ITelaInicial } from '../../store/reducers/telaInicial.reducer';
 import { selectorSocket } from '../../store/reducers/socket.reducer';
 import {
     receiveMessageRoboReducer, addNewChatPrivateReducer, receiveMessagePrivateReducer,
@@ -15,21 +15,19 @@ import {
 
 
 function ChatToSelect({ navigation }: any): JSX.Element {
-    console.log("Renderizou ChatToSelect")
 
     const [modalLogoff, setModalLogoff] = useState<boolean>(false)
     const [modalCreate, setModalCreate] = useState<boolean>(false)
 
-
-    function OpenCloseModalLogoff() {
+    function OpenCloseModalLogoff(): void {
         setModalLogoff(!modalLogoff)
     }
-    function OpenCloseModaCreate() {
+    function OpenCloseModaCreate(): void {
         setModalCreate(!modalCreate)
     }
 
     const dispatch = useDispatch()
-    let telaInicialData = useSelector(selectorTelaInicial)
+    let telaInicialData: ITelaInicial = useSelector(selectorTelaInicial)
     let { socket } = useSelector(selectorSocket)
     let chatContent: IChatContent[] = useSelector(selectorChatContent)
 
@@ -37,13 +35,12 @@ function ChatToSelect({ navigation }: any): JSX.Element {
         //não permite voltar com a seta fisica do celular
         BackHandler.addEventListener('hardwareBackPress', function () { return true })
 
-
         //recebe do servidor dados (se sucesso) para criar conversa privada. O client inicia o ciclo
         //poder ser por solicicitação da outra ponta, pois o amigo ao add, a outra ponta recebe a solicitação para criar o chat
         socket.on("create_chat_private_client", ({ sucess, message, userName, id, time }: any) => {
             if (sucess) {
                 dispatch(addNewChatPrivateReducer({ sucess, userName, id, time }))
-                Alert.alert(`Iniciado uma conversa com ${userName}. Check o painel a esquerda`)
+                Alert.alert(`Iniciado uma conversa com ${userName}.`)
             } else {
                 Alert.alert(message)
             }
@@ -51,7 +48,6 @@ function ChatToSelect({ navigation }: any): JSX.Element {
 
         //recebe mensagem robo 
         socket.on("received_message_from_robo", ({ content, author, time, image, isCharts }: any) => {
-            console.log("Mensagem recebida do ROBO")
             dispatch(receiveMessageRoboReducer({ content, author, time, image, isCharts }))
         })
         //recebe mensagem privada
@@ -81,7 +77,6 @@ function ChatToSelect({ navigation }: any): JSX.Element {
         })
 
         socket.on("received_message_room", ({ destination, message, author, chatID }: any) => {
-            console.log("recebeu mensagem de SALA")
             dispatch(receiveMessageRoomReducer({ destination, message, author, chatID }))
         })
 

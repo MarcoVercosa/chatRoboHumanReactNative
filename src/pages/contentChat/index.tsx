@@ -8,7 +8,6 @@ import { RenderFlatContentChatHeader } from "./RenderFlatContentChatHeader/index
 import RenderFlatContentChat from './RenderFlatContentChat';
 
 function ContentChat(): JSX.Element {
-    console.log("Renderizou ContentChat")
     const [typeMessage, setTypeMessage] = useState<string>("")
 
     const { socket }: any = useSelector(selectorSocket)
@@ -21,7 +20,7 @@ function ContentChat(): JSX.Element {
         let time = `${date.getHours()}:${date.getMinutes()}`
 
         //obtem os dados do chat que está aberto
-        let findDataChatOpen = contentChatData.filter((data: IChatContent) => data.openChat)
+        let findDataChatOpen = contentChatData.filter((data: any): any => data.openChat)
 
         Send({
             message: typeMessage,
@@ -62,7 +61,8 @@ function ContentChat(): JSX.Element {
                 <FlatList
                     data={contentChatData}
                     keyExtractor={item => String(item.chatID)}
-                    renderItem={({ item }) => <RenderFlatContentChatHeader item={item} />}
+                    //renderItem={({ item }) => <RenderFlatContentChatHeader item={item} />}
+                    renderItem={RenderFlatContentChatHeader}
                 />
                 <FlatList
                     data={contentChatData}
@@ -117,8 +117,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         borderWidth: 1,
         borderColor: "grey",
-
-
     },
     viewContainerChatMessageButton: {
         backgroundColor: "#00ffe0",

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { useDispatch, useSelector } from "react-redux"
 import { selectorSocket } from '../../store/reducers/socket.reducer';
 import { changeDadosTelaInicialReducer } from '../../store/reducers/telaInicial.reducer';
@@ -8,7 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function Login({ navigation }: any): JSX.Element {
-    console.log("Renderizou Login")
     let { socket }: any = useSelector(selectorSocket)
     const [email, setEmail] = useState<string>("")
     const [name, setName] = useState<string>("")
@@ -44,6 +43,7 @@ export default function Login({ navigation }: any): JSX.Element {
             //redireciona para o componente ChatToSelect
             navigation.navigate("ChatToSelect")
         }
+
     }, [socket])
 
     return (

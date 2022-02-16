@@ -1,28 +1,32 @@
 import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
 import { useDispatch, useSelector } from "react-redux"
-import { deleteChatReducer } from '../../../../store/reducers/contentChat.reducer';
+import { deleteChatReducer, IChatContent } from '../../../../store/reducers/contentChat.reducer';
 import { selectorSocket } from '../../../../store/reducers/socket.reducer';
-import { selectorTelaInicial } from '../../../../store/reducers/telaInicial.reducer';
+import { selectorTelaInicial, ITelaInicial } from '../../../../store/reducers/telaInicial.reducer';
 
+interface IModalDeleteChat {
+    data: IChatContent
+    OpenCloseModalDelete: () => void;
+    modalDeleteIsVisible: boolean
+}
 
-export default function ModalDeleteChat({ data, OpenCloseModalDelete, modalDeleteIsVisible }: any): JSX.Element {
+export default function ModalDeleteChat({ data, OpenCloseModalDelete, modalDeleteIsVisible }: IModalDeleteChat): JSX.Element {
     const dispatch = useDispatch()
     const { socket }: any = useSelector(selectorSocket)
-    let telaInicialData = useSelector(selectorTelaInicial)
+    let telaInicialData: ITelaInicial = useSelector(selectorTelaInicial)
 
     function DeleteChat(confirm: boolean) {
         if (confirm) {
             if (data.isRoom) {
-
                 socket.emit("send_message_to_chat_room", {
                     destination: data.chatNameDestination,
                     message: `${telaInicialData.name} deixou a sala`,
                     author: telaInicialData,
                     chatID: data.chatID
                 })
-                dispatch(deleteChatReducer(data.chatID))
-                Alert.alert(`A Sala ${data.chatNameDestination} foi deletado com sucesso`)
+                dispatch(deleteChatReducer({ chatID: String(data.chatID) }))
+                Alert.alert(`Você saiu da sala ${data.chatNameDestination} com sucesso`)
                 OpenCloseModalDelete()
                 return
             }
@@ -33,7 +37,7 @@ export default function ModalDeleteChat({ data, OpenCloseModalDelete, modalDelet
                     author: telaInicialData.name,
                     chatID: data.chatID
                 })
-                dispatch(deleteChatReducer(data.chatID))
+                dispatch(deleteChatReducer({ chatID: String(data.chatID) }))
                 Alert.alert(`O Chat privado ${data.chatNameDestination} foi deletado com sucesso`)
                 OpenCloseModalDelete()
                 return
@@ -52,7 +56,7 @@ export default function ModalDeleteChat({ data, OpenCloseModalDelete, modalDelet
         >
             <View style={styles.modalDeleteContainer}>
                 <View style={styles.modalDeleteViewMensagem} >
-                    <Text style={styles.modalDeleteViewMensagemText}>Deletar o chat "{data.chatNameDestination}" ?</Text>
+                    <Text style={styles.modalDeleteViewMensagemText}>Sair do chat "{data.chatNameDestination}" ?</Text>
                 </View>
                 <View style={styles.modalDeleteViewButtons} >
                     <TouchableOpacity style={styles.modalDeleteButtonSim} onPressOut={() => DeleteChat(true)}>

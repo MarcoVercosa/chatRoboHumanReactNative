@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface ITelaInicial {
+export interface ITelaInicial {
     email: string;
     name: string;
     // activeComponentChat: boolean;
