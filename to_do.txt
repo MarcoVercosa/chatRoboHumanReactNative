@@ -1,7 +1,5 @@
-criar método, ao segurar um chat dará a opção de ser excluído - DONE
-Arrumar barra de navegação - DONE
-arrumar bug do teclado que desconfigura o layout - DONE
-não deixar voltar para a tela de login pelas setas de navegação ou mandar uma mensagem pelo o menos que será deslogado - DONE
-melhorar tipagem
-estilizar mais os componentes.
+deixar tamanho e altura responsivas
+modo claro do celular as letras pretas ficam brancas e somem
+se o nome do chat for grande, oculta o ID
+Não permitir enviar mensagem  sem letra
 

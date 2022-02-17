@@ -1,9 +1,9 @@
 import React, { useEffect, useState, memo } from 'react';
 import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity, Image, BackHandler, } from 'react-native';
 
-import RenderFlatChatToSelect from './RenderFlatChatToSelect/RenderFlatChatToSelect';
-import ModalLogoff from "./modal/logoff/index"
-import ModalCreate from "./modal/create/index"
+import RenderFlatChatToSelect from '../../componentes/RenderFlatChatToSelect/RenderFlatChatToSelect';
+import ModalLogoff from "../../componentes/modal/logoff/index"
+import ModalCreate from "../../componentes/modal/create/index"
 import { useDispatch, useSelector } from "react-redux"
 import { selectorTelaInicial, ITelaInicial } from '../../store/reducers/telaInicial.reducer';
 import { selectorSocket } from '../../store/reducers/socket.reducer';
@@ -90,7 +90,7 @@ function ChatToSelect({ navigation }: any): JSX.Element {
                 <View style={styles.opçoes}>
                     {/* renderiza o heaer, onde ficam nome user, o ID e os dois modals */}
                     <TouchableOpacity onPressOut={OpenCloseModalLogoff}>
-                        <Image style={styles.opçoesLogoffImage} source={require("../../assets/icons/logoff.png")} />
+                        <Image style={styles.opçoesLogoffImage} source={require("../../assets/icons/logoff.jpg")} />
                         {modalLogoff && <ModalLogoff modalLogoff={modalLogoff} OpenCloseModal={OpenCloseModalLogoff} navigation={navigation} />}
                     </TouchableOpacity>
                 </View>
@@ -106,7 +106,7 @@ function ChatToSelect({ navigation }: any): JSX.Element {
                 </View>
                 <View style={styles.logoff}>
                     <TouchableOpacity onPressOut={OpenCloseModaCreate}>
-                        <Image style={styles.opçoesCreateImage} source={require("../../assets/icons/create.png")} />
+                        <Image style={styles.opçoesCreateImage} source={require("../../assets/icons/create.jpg")} />
                         {modalCreate && <ModalCreate modalLogoff={modalCreate} OpenCloseModaCreate={OpenCloseModaCreate} navigation={navigation} />}
                     </TouchableOpacity>
                 </View>

@@ -1,11 +1,12 @@
 import React, { useState, memo } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Image, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Image, FlatList, KeyboardAvoidingView, } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useDispatch, useSelector } from "react-redux"
 import { sendMessageRoboReducer, sendMessagePrivateReducer, sendMessageRoomReducer, selectorChatContent, IChatContent } from '../../store/reducers/contentChat.reducer'
 import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
 import { selectorSocket } from '../../store/reducers/socket.reducer';
-import { RenderFlatContentChatHeader } from "./RenderFlatContentChatHeader/index"
-import RenderFlatContentChat from './RenderFlatContentChat';
+import { RenderFlatContentChatHeader } from "../../componentes/RenderFlatContentChatHeader/index"
+import RenderFlatContentChat from '../../componentes/RenderFlatContentChat/index';
 
 function ContentChat(): JSX.Element {
     const [typeMessage, setTypeMessage] = useState<string>("")
@@ -58,36 +59,42 @@ function ContentChat(): JSX.Element {
         <>
             <View style={styles.viewContainerChat}>
 
+                <View style={styles.viewContainerChatHeader}>
+                    <FlatList
+                        data={contentChatData}
+                        keyExtractor={item => String(item.chatID)}
+                        //renderItem={({ item }) => <RenderFlatContentChatHeader item={item} />}
+                        renderItem={RenderFlatContentChatHeader}
+                        removeClippedSubviews={false}//o text dentro dos render do FlatList não ficam selecionados, mesmo conf. Essa prop força a funcionar
+                    />
+                </View>
                 <FlatList
                     data={contentChatData}
-                    keyExtractor={item => String(item.chatID)}
-                    //renderItem={({ item }) => <RenderFlatContentChatHeader item={item} />}
-                    renderItem={RenderFlatContentChatHeader}
-                />
-                <FlatList
-                    data={contentChatData}
-                    keyExtractor={item => String(item.chatID)}
+                    //keyExtractor={item => String(item.chatID)}
+                    keyExtractor={() => Math.random().toFixed(6)}
                     renderItem={({ item }) => <RenderFlatContentChat item={item} />}
                 />
 
                 {/*  evita que  o teclado desconfigure o layout */}
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
-                >
-                    <View style={styles.viewContainerChatMessageType}>
-                        <TextInput
-                            placeholder='Mensagem'
-                            style={styles.viewContainerChatInputMessageType}
-                            multiline={true}
-                            value={typeMessage}
-                            onChangeText={(text: string) => { setTypeMessage(text) }}
-                        />
-                        <TouchableOpacity style={styles.viewContainerChatMessageButton} onPressOut={SendMessage}>
-                            <Image style={styles.viewContainerChatMessageImage} source={require("../../assets/icons/send.png")} />
-                        </TouchableOpacity>
-                    </View>
-                </KeyboardAvoidingView>
             </View>
+            {/* <KeyboardAvoidingView style={{ backgroundColor: "blue" }}
+            //behavior={Platform.OS === "ios" ? "padding" : "height"}
+            > */}
+            <View style={styles.viewContainerChatMessageType}>
+                <TextInput
+                    placeholder='Mensagem'
+                    style={styles.viewContainerChatInputMessageType}
+                    multiline={true}
+                    value={typeMessage}
+                    onChangeText={(text: string) => { setTypeMessage(text) }}
+                />
+                <TouchableOpacity style={styles.viewContainerChatMessageButton} onPressOut={SendMessage}
+                    disabled={typeMessage.length < 1}
+                >
+                    <Image style={styles.viewContainerChatMessageImage} source={require("../../assets/icons/send.jpg")} />
+                </TouchableOpacity>
+            </View>
+            {/* </KeyboardAvoidingView> */}
         </>
 
     )
@@ -96,38 +103,47 @@ function ContentChat(): JSX.Element {
 const styles = StyleSheet.create({
     viewContainerChat: {
         backgroundColor: "#a8d7ff",
-        flex: 1
+        //flex: 1
+        height: "90%"
+    },
+    viewContainerChatHeader: {
+        height: "13%",
+        backgroundColor: "white",
+
     },
 
     viewContainerChatMessageType: {
         flexDirection: "row",
         borderRadius: 25,
-        width: 400,
+        width: "100%",
         justifyContent: "center",
         alignItems: "center",
         margin: 0,
-
+        height: "10%",
+        //backgroundColor: "red"
     },
     viewContainerChatInputMessageType: {
         backgroundColor: "white",
-        width: 325,
-        height: 90,
+        width: "82%",
+        height: "91%",
         marginRight: 5,
         borderRadius: 25,
         fontSize: 25,
         borderWidth: 1,
         borderColor: "grey",
+        color: "#514e4e",
+        padding: 8
     },
     viewContainerChatMessageButton: {
-        backgroundColor: "#00ffe0",
+        //backgroundColor: "white",
         padding: 3,
         borderRadius: 25,
-        width: 55
+        width: "15%"
     },
     viewContainerChatMessageImage: {
-        width: 60,
+        width: "100%",
         height: 60,
-        tintColor: "white",
+        tintColor: "#08d8ff",
     }
 
 })

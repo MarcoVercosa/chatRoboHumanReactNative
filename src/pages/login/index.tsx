@@ -50,7 +50,7 @@ export default function Login({ navigation }: any): JSX.Element {
         <SafeAreaView style={styles.container}>
             <View >
                 <Image
-                    source={require("../../assets/icons/chat.png")}
+                    source={require("../../assets/icons/chat.jpg")}
                     style={styles.image}
                 />
                 <TextInput
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
         width: 300,
         padding: 20,
         borderRadius: 25,
+        color: "#514e4e"
     },
     button: {
         backgroundColor: "#f61058",
