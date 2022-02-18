@@ -1,10 +1,10 @@
-# Bem vindo CHAT ROBO HUMAN ANDROID ! <img src=https://1.bp.blogspot.com/-fwtp0LoWWno/UM3lDwNQTiI/AAAAAAAAAuk/X1m7YVNAEOE/s1600/Droidgif.gif width="80">
+# Bem vindo ao CHAT ROBO HUMAN para ANDROID ! <img src=https://1.bp.blogspot.com/-fwtp0LoWWno/UM3lDwNQTiI/AAAAAAAAAuk/X1m7YVNAEOE/s1600/Droidgif.gif width="80">
 
  
 <img align="center" width="250" height="150" src="https://miro.medium.com/max/1400/1*HBoFpeOTCuIDQMKsSpYN7A.png"><img align="center" width="250" height="150" src="https://miro.medium.com/max/1400/0*MNVJq_8e0SJoqZb5.jpg"><img align="center" width="250" height="150" src="https://miro.medium.com/max/811/1*tOitxCwTNcS3ESstLylmtg.png">
  
 
-## :computer: About site
+## :computer: About the APP
 
 ### Status: 
 :heavy_check_mark: Produção
@@ -32,13 +32,14 @@ Sistema de chat criado onde permite criação de Private Chat, Room Chat e receb
 
 # Tecnologias presentes:
  
-## FRONT-END -> <img align="center" width="80" height="80" src="https://cdn.worldvectorlogo.com/logos/typescript.svg">
-### REACT
- -> React Router Dom
+## APP -> <img align="center" width="80" height="80" src="https://cdn.worldvectorlogo.com/logos/typescript.svg">
+### REACT NATIVE <img src=https://1.bp.blogspot.com/-fwtp0LoWWno/UM3lDwNQTiI/AAAAAAAAAuk/X1m7YVNAEOE/s1600/Droidgif.gif width="40">
 
- -> React REDUX
+ -> React Navigation
 
- -> Materia UI
+ ->  REDUX
+ 
+ ->  React Async Storage
  
  ->  Recharts
  
@@ -57,7 +58,7 @@ Sistema de chat criado onde permite criação de Private Chat, Room Chat e receb
 # Arquitetura:
 - BACK-END: Funções e chamadas isoladas, onde permitiu a criação de um códido limpo, organizado e de fácil manutenção.
 
-- FRONT-END: Utiliza componentização, renderização condicional e um código com responsabilidades bem separadas, permitindo fácil manutenção e proporcionando um site rápido e intuitivo.
+- APP: Utiliza componentização, renderização condicional e um código com responsabilidades bem separadas, permitindo fácil manutenção e proporcionando um App rápido e intuitivo.
 
 # InfraEstrutura:
 ## Back-end está hospedado na Heroku.
