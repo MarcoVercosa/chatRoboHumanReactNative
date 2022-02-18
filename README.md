@@ -1,6 +1,4 @@
-# Bem vindo CHAT ROBO HUMAN! <img src=https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Earth.gif width="30">
-
-## SITE: https://chathumanrobo.vercel.app/
+# Bem vindo CHAT ROBO HUMAN ANDROID ! <img src=https://1.bp.blogspot.com/-fwtp0LoWWno/UM3lDwNQTiI/AAAAAAAAAuk/X1m7YVNAEOE/s1600/Droidgif.gif width="80">
 
  
 <img align="center" width="250" height="150" src="https://miro.medium.com/max/1400/1*HBoFpeOTCuIDQMKsSpYN7A.png"><img align="center" width="250" height="150" src="https://miro.medium.com/max/1400/0*MNVJq_8e0SJoqZb5.jpg"><img align="center" width="250" height="150" src="https://miro.medium.com/max/811/1*tOitxCwTNcS3ESstLylmtg.png">
@@ -29,9 +27,7 @@ Sistema de chat criado onde permite criação de Private Chat, Room Chat e receb
 - :heavy_check_mark: Ao uma origem solicitar uma conversa privada ou sair, o destino é imediatamente notificado.
 - :heavy_check_mark: Ao uma pessoa entrar ou sair de uma Room Chat, todos os membros do grupos serão imediatamente notificados.
 
-:computer: Desenvolvido para navegadores Desktop.
-
-:iphone: Desenvolvido para navegadores Mobile.
+:iphone: Desenvolvido para Mobile ANDROID.
 
 
 # Tecnologias presentes:
@@ -64,6 +60,6 @@ Sistema de chat criado onde permite criação de Private Chat, Room Chat e receb
 - FRONT-END: Utiliza componentização, renderização condicional e um código com responsabilidades bem separadas, permitindo fácil manutenção e proporcionando um site rápido e intuitivo.
 
 # InfraEstrutura:
-## O Front-end está hospedado na Vercel, enquanto o back-end na Heroku.
+## Back-end está hospedado na Heroku.
 
 
