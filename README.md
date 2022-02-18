@@ -1,4 +1,4 @@
-# Bem vindo ao CHAT ROBO HUMAN para ANDROID ! <img src=https://1.bp.blogspot.com/-fwtp0LoWWno/UM3lDwNQTiI/AAAAAAAAAuk/X1m7YVNAEOE/s1600/Droidgif.gif width="80">
+# Bem vindo ao CHAT ROBO HUMAN para ANDROID ! <img src=https://1.bp.blogspot.com/-fwtp0LoWWno/UM3lDwNQTiI/AAAAAAAAAuk/X1m7YVNAEOE/s1600/Droidgif.gif width="55">
 
  
 <img align="center" width="250" height="150" src="https://miro.medium.com/max/1400/1*HBoFpeOTCuIDQMKsSpYN7A.png"><img align="center" width="250" height="150" src="https://miro.medium.com/max/1400/0*MNVJq_8e0SJoqZb5.jpg"><img align="center" width="250" height="150" src="https://miro.medium.com/max/811/1*tOitxCwTNcS3ESstLylmtg.png">
