@@ -1,6 +1,6 @@
 import React, { useState, memo } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Image, FlatList, KeyboardAvoidingView, } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { StyleSheet, View, TextInput, TouchableOpacity, Image, FlatList, } from 'react-native';
+
 import { useDispatch, useSelector } from "react-redux"
 import { sendMessageRoboReducer, sendMessagePrivateReducer, sendMessageRoomReducer, selectorChatContent, IChatContent } from '../../store/reducers/contentChat.reducer'
 import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
@@ -74,13 +74,27 @@ function ContentChat(): JSX.Element {
                     keyExtractor={() => Math.random().toFixed(6)}
                     renderItem={({ item }) => <RenderFlatContentChat item={item} />}
                 />
+                <View style={styles.viewContainerChatMessageType}>
+                    <TextInput
+                        placeholder='Mensagem'
+                        style={styles.viewContainerChatInputMessageType}
+                        multiline={true}
+                        value={typeMessage}
+                        onChangeText={(text: string) => { setTypeMessage(text) }}
+                    />
+                    <TouchableOpacity style={styles.viewContainerChatMessageButton} onPressOut={SendMessage}
+                        disabled={typeMessage.length < 1}
+                    >
+                        <Image style={styles.viewContainerChatMessageImage} source={require("../../assets/icons/send.jpg")} />
+                    </TouchableOpacity>
+                </View>
 
                 {/*  evita que  o teclado desconfigure o layout */}
             </View>
             {/* <KeyboardAvoidingView style={{ backgroundColor: "blue" }}
             //behavior={Platform.OS === "ios" ? "padding" : "height"}
             > */}
-            <View style={styles.viewContainerChatMessageType}>
+            {/* <View style={styles.viewContainerChatMessageType}>
                 <TextInput
                     placeholder='Mensagem'
                     style={styles.viewContainerChatInputMessageType}
@@ -93,7 +107,7 @@ function ContentChat(): JSX.Element {
                 >
                     <Image style={styles.viewContainerChatMessageImage} source={require("../../assets/icons/send.jpg")} />
                 </TouchableOpacity>
-            </View>
+            </View> */}
             {/* </KeyboardAvoidingView> */}
         </>
 
@@ -104,7 +118,7 @@ const styles = StyleSheet.create({
     viewContainerChat: {
         backgroundColor: "#a8d7ff",
         //flex: 1
-        height: "90%"
+        height: "100%"
     },
     viewContainerChatHeader: {
         height: "13%",
@@ -119,8 +133,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         margin: 0,
-        height: "10%",
-        //backgroundColor: "red"
+        height: "15%",
+        backgroundColor: "white",
     },
     viewContainerChatInputMessageType: {
         backgroundColor: "white",

@@ -1,4 +1,4 @@
-#Wed Feb 16 23:49:15 BRT 2022
+#Fri Feb 18 02:54:58 BRT 2022
 base.0=C\:\\Users\\marco\\Documents\\projetos\\reactNative\\chatHumanRoboAndroid\\chatRoboHuman\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

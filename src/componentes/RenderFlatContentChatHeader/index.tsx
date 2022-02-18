@@ -9,7 +9,7 @@ function RenderFlatContentChatHeader({ item }: { item: IChatContent }): JSX.Elem
                 <>
                     {/* <View style={styles.viewContainerChatHeader}> */}
                     <Text selectable={true} style={styles.viewContainerChatHeaderTextName}>{item.chatNameDestination}</Text>
-                    <Text selectable={true} style={styles.viewContainerChatHeaderTextId}>IssD: {item.chatID}</Text>
+                    <Text selectable={true} style={styles.viewContainerChatHeaderTextId}>ID: {item.chatID}</Text>
                     {/* </View> */}
                 </>
             }
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         alignContent: "center",
         color: "#514e4e",
-        marginTop: "2%",
+        marginTop: "1%",
     }
 })
 

@@ -74,7 +74,7 @@ function Charts({ data }: ICharts): JSX.Element {
                 >Níveis dos Sistemas de Abastecimento de São Paulo (%) - {data[0].currentDate}</Text>
                 <BarChart
                     data={dataVolume}
-                    width={311}
+                    width={295}
                     height={450}
                     yAxisSuffix=""
                     yAxisLabel=""
@@ -89,7 +89,7 @@ function Charts({ data }: ICharts): JSX.Element {
                 >Variações dia (%)  - {data[0].currentDate}- {data[0].currentDate}</Text>
                 <BarChart
                     data={dataVariacao}
-                    width={311}
+                    width={295}
                     height={450}
                     yAxisSuffix=""
                     yAxisLabel=""
