@@ -1,6 +1,5 @@
 import React, { useState, memo } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, FlatList, } from 'react-native';
-
 import { useDispatch, useSelector } from "react-redux"
 import { sendMessageRoboReducer, sendMessagePrivateReducer, sendMessageRoomReducer, selectorChatContent, IChatContent } from '../../store/reducers/contentChat.reducer'
 import { selectorTelaInicial } from '../../store/reducers/telaInicial.reducer';
@@ -19,7 +18,6 @@ function ContentChat(): JSX.Element {
     function SendMessage() {
         let date = new Date()
         let time = `${date.getHours()}:${date.getMinutes()}`
-
         //obtem os dados do chat que está aberto
         let findDataChatOpen = contentChatData.filter((data: any): any => data.openChat)
 
@@ -123,7 +121,6 @@ const styles = StyleSheet.create({
     viewContainerChatHeader: {
         height: "13%",
         backgroundColor: "white",
-
     },
 
     viewContainerChatMessageType: {
