@@ -9,7 +9,6 @@ import RenderFlatContentChat from '../../componentes/RenderFlatContentChat/index
 
 function ContentChat(): JSX.Element {
     const [typeMessage, setTypeMessage] = useState<string>("")
-
     const { socket }: any = useSelector(selectorSocket)
     let nameTelaInicial: { name: string } = useSelector(selectorTelaInicial)
     const contentChatData: Array<IChatContent> = useSelector(selectorChatContent)
